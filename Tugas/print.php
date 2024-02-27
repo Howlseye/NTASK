@@ -1,77 +1,82 @@
-<?php 
-
-require('fpdf/fpdf.php'); 
+<?php
+require('fpdf/fpdf.php');
 
 class PDF extends FPDF {
-
-    // Page header 
     function Header() {
-        // Add logo to page 
-        // $this->Image('gfg1.png',10,8,33); 
+        $this->Image('../assets/icons/logo-itam.png', 10, 4, 0, 20);
+        $this->SetFont('Arial','B',20);
+        $this->Cell(0,10,'                                                                     Detail Tugas',0,1,'C');
+        $this->Ln(10);
+        $this->Line(10, $this->GetY(), 200, $this->GetY());
+        $this->Ln(10);
+    }
+    function Footer() {
+        $this->SetY(-15);
+        $this->SetFont('Arial','I',8);
+        // $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+    }
+    function ChapterTitle($title) {
+        $this->Line(10, $this->GetY(), 200, $this->GetY());
+        $this->Ln(5);
+        $this->SetFont('Arial','B',15);
+        $this->Cell(0,5,$title,0,0.1,'L');
+        $this->Ln(5);
+        $this->Line(10, $this->GetY(), 200, $this->GetY());
+        $this->Ln(10);
+    }
+    function ChapterBody($text) {
+        $this->SetFont('Arial','',13);
+        $this->Cell(0,10,$text,0,0.1,'L');
+        $this->Ln(5);
+    }
+}
 
-        // Set font family to Arial bold  
-        $this->SetFont('Arial','B',20); 
-
-        // Get the data from the query string
-        $tugas = $_GET['tugas'];
-        $deskripsi = $_GET['deskripsi'];
-        $deadline = $_GET['deadline'];
-        $prioritas = $_GET['prioritas'];
-        $status = $_GET['status'];
-
-        // Move to the right 
-        $this->Cell(80); 
-
-        // Header 
-        $this->Cell(50,10,'Detail Tugas'); 
-        // $this->Ln();
-        // $this->Cell(50,10,'Description: ' . $deskripsi,1,0,'C'); 
-        // $this->Ln();
-        // $this->Cell(50,10,'Deadline: ' . $deadline,1,0,'C'); 
-        // $this->Ln();
-        // $this->Cell(50,10,'Priority: ' . $prioritas,1,0,'C'); 
-        // $this->Ln();
-        // $this->Cell(50,10,'Status: ' . $status,1,0,'C'); 
-        $this->Ln(20); 
-    } 
-
-    // Page footer 
-    function Footer() { 
-        // Position at 1.5 cm from bottom 
-        $this->SetY(-15); 
-
-        // Arial italic 8 
-        $this->SetFont('Arial','I',8); 
-
-        // Page number 
-        // $this->Cell(0,10,'Page ' . 
-        //     $this->PageNo() . '/{nb}',0,0,'C'); 
-    } 
-} 
-
+// Get the query parameters from the URL
 $tugas = $_GET['tugas'];
 $deskripsi = $_GET['deskripsi'];
 $deadline = $_GET['deadline'];
+$dibuat = $_GET['dibuat'];
 $prioritas = $_GET['prioritas'];
 $status = $_GET['status'];
 
-// Instantiation of FPDF class 
-$pdf = new PDF(); 
+// Instantiation of FPDF class
+$pdf = new PDF();
 
-// Define alias for number of pages 
-$pdf->AliasNbPages(); 
-$pdf->AddPage(); 
-$pdf->SetFont('Times','',14); 
+// Define alias for number of pages
+$pdf->AliasNbPages();
 
-// Add the task details
-$pdf->Cell(0, 10, 'Tugas: ' . $tugas, 0, 1); 
-$pdf->Cell(0, 10, 'Deskripsi: ' . $deskripsi, 0, 1); 
-$pdf->Cell(0, 10, 'Deadline: ' . $deadline, 0, 1); 
-$pdf->Cell(0, 10, 'Prioritas: ' . $prioritas, 0, 1); 
-$pdf->Cell(0, 10, 'Status: ' . $status, 0, 1); 
+// Add a page
+$pdf->AddPage();
 
-$pdf->Output(); 
+// Set font
+$pdf->SetFont('Arial','',12);
 
-?>
+// Add chapter title
+// $pdf->ChapterTitle('----------------------------------------------------------------------------------------------------------------------------');
+// $pdf->ChapterTitle('Detail Tugas');
 
+// Add chapter body
+
+$pdf->ChapterBody('Nama Tugas       :       '.$tugas);
+$pdf->ChapterBody('Deskripsi             :       '.$deskripsi);
+$pdf->ChapterBody('Prioritas               :       '.$prioritas);
+if($status == 'Selesai') {
+    $pdf->SetTextColor(51, 204, 51);
+} else if($status == 'Belum Selesai'){
+    $pdf->SetTextColor(230, 0, 0);
+}
+$pdf->ChapterBody('Status                  :       '.$status);
+$pdf->SetTextColor(0, 0, 0);
+$pdf->Ln(10);
+
+// $pdf->ChapterTitle('----------------------------------------------------------------------------------------------------------------------------');
+$pdf->ChapterTitle('Rincian Tugas');
+// $pdf->ChapterTitle('----------------------------------------------------------------------------------------------------------------------------');
+
+$pdf->ChapterBody('Tanggal Pembuatan        :       '.$dibuat);
+$pdf->SetTextColor(230, 0, 0);
+$pdf->ChapterBody('Tenggat Waktu                :       '.$deadline);
+
+// Output the document
+$pdf->Output();
 ?>

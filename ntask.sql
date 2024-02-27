@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Feb 2024 pada 14.35
+-- Waktu pembuatan: 27 Feb 2024 pada 12.10
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -52,7 +52,7 @@ INSERT INTO `tugas` (`id_tugas`, `id_user`, `tugas`, `deskripsi`, `deadline`, `d
 (31, 16, 'Belanja Bulanan', '-', '2024-02-27', '2024-02-24', 'Rendah', 'Belum Selesai'),
 (32, 16, 'Mengikuti Pelatihan', 'Pelatihan pengembangan diri', '2024-02-23', '2024-02-24', 'Rendah', 'Selesai'),
 (33, 16, 'Menyiapkan Presentasi', 'Presentasi untuk rapat', '2024-02-26', '2024-02-24', 'Tinggi', 'Selesai'),
-(34, 16, 'Mengikuti Pelatihan', 'Pelatihan keterampilan manajerial', '2024-02-28', '2024-02-24', 'Tinggi', 'Belum Selesai'),
+(34, 16, 'Mengikuti Pelatihan', 'Pelatihan keterampilan', '2024-02-28', '2024-02-24', 'Tinggi', 'Belum Selesai'),
 (36, 17, 'Tugas 1', '-', '2024-02-22', '2024-02-24', 'Rendah', 'Selesai'),
 (37, 17, 'Tugas 2', '-', '2024-02-29', '2024-02-24', 'Rendah', 'Belum Selesai'),
 (38, 17, 'Tugas 3', '-', '2024-02-15', '2024-02-24', 'Sedang', 'Selesai'),
@@ -80,7 +80,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `nama`, `email`, `sandi`, `tentang`) VALUES
 (16, 'User', 'user@web.com', 'b8m2', 'Halo!'),
-(17, 'User 2', 'user2@web.com', 'bci2', 'Halo gaes');
+(17, 'User 2', 'user2@web.com', 'bci2', 'Halo gaes'),
+(18, 'user55', 'user55@gmail.com', 'b8m2ciU=', 'Halo!');
 
 --
 -- Indexes for dumped tables
@@ -107,13 +108,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `tugas`
 --
 ALTER TABLE `tugas`
-  MODIFY `id_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_tugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

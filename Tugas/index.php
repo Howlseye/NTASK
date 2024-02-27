@@ -153,6 +153,7 @@
                     <input type="date" id="deadline" class="inp" name="deadline" required>
                     <label class="ilab">Deadline</label>
                 </div>
+                <input type="hidden" id="dibuat" name="dibuat">
                 <div class="ing" style="position: relative; margin-top: 20px; padding-right: 100px;">
                     <select id="prioritas" name="prioritas" class="inp" required>
                         <option value="" hidden>Pilih Prioritas</option>
@@ -199,12 +200,16 @@
             var dead = row.cells[3].innerText;
             var [d, m, y] = dead.split("/");
             var deadline = `${y}-${m}-${d}`;
+            var dib = row.cells[4].innerText;
+            var [a, b, c] = dib.split("/");
+            var dibuat = `${c}-${b}-${a}`;
             var prioritas = row.cells[5].innerText;
             var status = row.cells[6].innerText;
             var id_tugas = document.getElementById('idtugas');
             var inp_tugas = document.getElementById('task');
             var inp_deskripsi = document.getElementById('deskripsi');
             var inp_deadline = document.getElementById('deadline');
+            var inp_dibuat = document.getElementById('dibuat');
             var sel_prior = document.getElementById('prioritas');
             var stat_inp = document.getElementById('statu');
             var stat_btn = document.getElementById('stat');
@@ -214,6 +219,7 @@
             inp_tugas.value = tugas;
             inp_deskripsi.value = deskripsi;
             inp_deadline.value = deadline;
+            inp_dibuat.value = dibuat;
             sel_prior.value = prioritas;
             stat_inp.value = status;
             if(status == 'Selesai'){
@@ -236,11 +242,12 @@
             var tugas = document.getElementById('task').value;
             var deskripsi = document.getElementById('deskripsi').value;
             var deadline = document.getElementById('deadline').value;
+            var dibuat = document.getElementById('dibuat').value;
             var prior = document.getElementById('prioritas').value;
             var status = document.getElementById('statu').value;
-            window.location.href = "print.php?tugas=" + encodeURIComponent(tugas) + "&deskripsi=" + encodeURIComponent(deskripsi) + "&deadline=" + encodeURIComponent(deadline) + "&prioritas=" + encodeURIComponent(prior) + "&status=" + encodeURIComponent(status);
+            window.location.href = "print.php?tugas=" + encodeURIComponent(tugas) + "&deskripsi=" + encodeURIComponent(deskripsi) + "&deadline=" + encodeURIComponent(deadline) + "&dibuat=" + encodeURIComponent(dibuat) +  "&prioritas=" + encodeURIComponent(prior) + "&status=" + encodeURIComponent(status);
 
-        })
+        });
     </script>
 
 </body>
