@@ -138,6 +138,7 @@
     <div id="lihat" class="popup" style="top: -140px;">
         <div class="popup-content block">
             <span id="close" class="close">&times;</span>
+            <img src="../assets/icons/print.png" style="position: relative; top: 5px; cursor: pointer;" id="print">
             <form method="post" style="padding-top: 40px;">
                 <input type="hidden" name="id" id="idtugas">
                 <div class="ing" style="position: relative;">
@@ -230,6 +231,16 @@
         document.getElementById('close').onclick = function() {
             document.getElementById('lihat').style.display = 'none';
         };
+
+        document.getElementById('print').addEventListener('click', function(event){
+            var tugas = document.getElementById('task').value;
+            var deskripsi = document.getElementById('deskripsi').value;
+            var deadline = document.getElementById('deadline').value;
+            var prior = document.getElementById('prioritas').value;
+            var status = document.getElementById('statu').value;
+            window.location.href = "print.php?tugas=" + encodeURIComponent(tugas) + "&deskripsi=" + encodeURIComponent(deskripsi) + "&deadline=" + encodeURIComponent(deadline) + "&prioritas=" + encodeURIComponent(prior) + "&status=" + encodeURIComponent(status);
+
+        })
     </script>
 
 </body>
